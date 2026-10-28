@@ -1,18 +1,21 @@
-import Project from "./Project"
+import type { Project } from '../../models/project'
+import ProjectCard from './Project'
 
-function Projects () {
-  const projects = [
-  {
-    title: 'Portfolio Website',
-    description: 'My developer portfolio',
-    technologies: ['React', 'TypeScript'],
-  },
-  {
-    title: 'Book Tracker',
-    description: 'An app for tracking books',
-    technologies: ['Express', 'SQLite'],
-  },
-]
+function Projects() {
+  const projects: Project[] = [
+    {
+      id: 1,
+      title: 'Portfolio Website',
+      description: 'My developer portfolio',
+      technologies: ['React', 'TypeScript'],
+    },
+    {
+      id: 2,
+      title: 'Book Tracker',
+      description: 'An app for tracking books',
+      technologies: ['Express', 'SQLite'],
+    },
+  ]
 
   return (
     <>
@@ -20,12 +23,12 @@ function Projects () {
 
       <ul>
         {projects.map((project) => {
-          return (<li key={project.title}>
-            <Project project={project} />
-          </li>)
-        })
-
-        }
+          return (
+            <li key={project.id}>
+              <ProjectCard project={project} />
+            </li>
+          )
+        })}
       </ul>
     </>
   )

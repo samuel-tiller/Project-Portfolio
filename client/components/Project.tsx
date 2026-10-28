@@ -1,19 +1,27 @@
-import { ProjectData } from "../../models/project"
+import type { Project } from "../../models/project"
 
 
 interface Props {
-  project: ProjectData
+  project: Project
 }
 
 
-function Project (props: Props) {
+function ProjectCard (props: Props) {
   return (
     <>
       <h3>{props.project.title}</h3>
       <p>{props.project.description}</p>
-      <p>{props.project.technologies}</p>
+      <ul>
+        {props.project.technologies.map((technology) => {
+          return (
+            <li key={technology} >
+              {technology}
+            </li>
+          )
+        })}
+      </ul>
     </>
   )
 }
 
-export default Project
+export default ProjectCard
