@@ -1,7 +1,30 @@
-
+import Project from "./Project"
 
 function Projects () {
-  return <p>Project List</p>
+  const projects = [
+  {
+    title: 'Portfolio Website',
+    description: 'My developer portfolio',
+    technologies: ['React', 'TypeScript'],
+  },
+  {
+    title: 'Book Tracker',
+    description: 'An app for tracking books',
+    technologies: ['Express', 'SQLite'],
+  },
+]
+
+  return (
+    <>
+      <h2>My Projects</h2>
+
+      <ul>
+        <li>
+          <Project project={project}/>
+        </li>
+      </ul>
+    </>
+  )
 }
 
 export default Projects
