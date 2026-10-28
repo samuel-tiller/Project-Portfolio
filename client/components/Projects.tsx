@@ -19,9 +19,13 @@ function Projects () {
       <h2>My Projects</h2>
 
       <ul>
-        <li>
-          <Project project={project}/>
-        </li>
+        {projects.map((project) => {
+          return (<li key={project.title}>
+            <Project project={project} />
+          </li>)
+        })
+
+        }
       </ul>
     </>
   )
