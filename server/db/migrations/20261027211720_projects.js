@@ -5,8 +5,9 @@
 export function up(knex) {
   return knex.schema.createTable('projects', (table) => {
     table.increments('id')
-    table.string('title')
-    table.string()
+    table.string('title').notNullable()
+    table.text('description').notNullable()
+    table.string('github_url')
   })
   
 };
