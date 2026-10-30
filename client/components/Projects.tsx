@@ -1,21 +1,20 @@
-import type { Project } from '../../models/project'
 import ProjectCard from './Project'
+import { useProjects } from '../hooks/useProjects'
 
 function Projects() {
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'Portfolio Website',
-      description: 'My developer portfolio',
-      technologies: ['React', 'TypeScript'],
-    },
-    {
-      id: 2,
-      title: 'Book Tracker',
-      description: 'An app for tracking books',
-      technologies: ['Express', 'SQLite'],
-    },
-  ]
+  const { data: projects, isLoading, error} = useProjects()
+
+  if(isLoading){
+    return <p>Loading...</p>
+  }
+
+  if(error){
+    return <p>{error.message}</p>
+  }
+
+  if(!projects || projects.length === 0){
+    return <p>No projects found!</p>
+  }
 
   return (
     <>

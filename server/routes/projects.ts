@@ -17,12 +17,15 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
   try {
     const project = await db.getProjectById(req.params.id)
-    res.json(project)
+    if(!project){
+      return res.sendStatus(404)
+    }
+    res.json({project: project})
   } catch (err) {
-    next(err)
+    res.sendStatus(500)
   }
 })
 
@@ -34,7 +37,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res, next) => {
 
   try {
     const { owner, name } = req.body
-    const id = await db.addFruit({ owner, name })
+    const id = await db.addProject({ owner, name })
     res
       .setHeader('Location', `${req.baseUrl}/${id}`)
       .sendStatus(StatusCodes.CREATED)
