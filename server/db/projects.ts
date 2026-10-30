@@ -1,7 +1,7 @@
 import db from './connection.ts'
 import { Project, ProjectData } from '../../models/project.ts'
 
-export async function getAllProjects() {
+export async function getAllProjects(): Promise<Project[]> {
   const results = await db('projects')
     .join(
       'project_technologies',
@@ -47,8 +47,36 @@ export async function getAllProjects() {
   return projects as Project[]
 }
 
-export async function getProjectById(id: number | string) {
-  const project = await db('projects').select().first().where({ id })
+export async function getProjectById(id: number | string): Promise<Project | undefined> {
+  const result = await db('projects')
+    .join('project_technologies', 'projects.id', 'project_technologies.project_id')
+    .join('technologies', 'project_technologies.technology_id', 'technologies.id')
+    .where('projects.id', id)
+    .select(
+      'projects.id',
+      'projects.title',
+      'projects.description',
+      'projects.github_url',
+      'technologies.name as technologyName',
+    )
+
+    if(result[0] === undefined){
+      return 
+    }
+  
+    const currentProject = result[0]
+    const techList = result.map((project) => {
+      return project.technologyName
+    })
+
+    const project = {
+      id: currentProject.id,
+      title: currentProject.title,
+      description: currentProject.description,
+      github_url: currentProject.github_url,
+      technologies: techList
+    }
+
   return project as Project
 }
 

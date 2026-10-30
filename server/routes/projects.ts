@@ -19,8 +19,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const fruit = await db.getFruitById(req.params.id)
-    res.json(fruit)
+    const project = await db.getProjectById(req.params.id)
+    res.json(project)
   } catch (err) {
     next(err)
   }
