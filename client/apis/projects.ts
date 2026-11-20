@@ -9,6 +9,8 @@ export async function getProjects(): Promise<Project[]> {
 
 }
 
+
+// /projects/:id route
 export async function getProjectById(id: number): Promise<Project> {
     const response = await request.get(`${rootURL}/projects/${id}`)
     return response.body.project
