@@ -17,7 +17,7 @@ export async function getAllProjects(): Promise<Project[]> {
       'projects.id',
       'projects.title',
       'projects.description',
-      'projects.github_url',
+      'projects.github_url as githubUrl',
       'technologies.name as technologyName',
     )
 

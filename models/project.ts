@@ -1,7 +1,7 @@
 export interface ProjectData {
   title: string
   description: string
-  github_url?: string | null
+  githubUrl?: string | null
   technologies: string[]
 }
 
